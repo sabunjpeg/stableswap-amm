@@ -18,7 +18,7 @@ contract StableSwapTest is Test {
         xidr = new Token("XIDR", "XIDR", 18, 1_000_000e18);
         usdc = new Token("USDC", "USDC", 6, 1_000_000e6);
         usdt = new Token("USDT", "USDT", 6, 1_000_000e6);
-    
+
         // Deploy the StableSwap contract with 3 tokens
         address[3] memory tokens = [address(xidr), address(usdc), address(usdt)];
         swap = new StableSwap(tokens);
@@ -37,6 +37,4 @@ contract StableSwapTest is Test {
         assertEq(swap.tokens(1), address(usdc));
         assertEq(swap.tokens(2), address(usdt));
     }
-
 }
-
