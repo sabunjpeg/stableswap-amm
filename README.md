@@ -1,66 +1,37 @@
-## Foundry
+# 🌀 StableSwap AMM – Foundry Implementation
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A Curve-style StableSwap AMM implementation using [Foundry](https://book.getfoundry.sh/) to simulate and test swaps, liquidity provision, and removal. Built for composability and potential deployment on **Pharos Network**.
 
-Foundry consists of:
+## 📜 Overview
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+This project implements a stable asset AMM using the StableSwap invariant that blends constant-sum and constant-product properties. It is designed to:
+- Minimize slippage for similarly priced assets (e.g., stablecoins).
+- Allow adding/removing liquidity with minimal impermanent loss.
+- Be composable and deployable to EVM-compatible chains like Pharos.
 
-## Documentation
+## ⚙️ Invariant Formula
+Invariant - price of trade and amount of liquidity are determined by this equation
 
-https://book.getfoundry.sh/
+An^n sum(x_i) + D = ADn^n + D^(n + 1) / (n^n prod(x_i))
 
-## Usage
+Topics
+0. Newton's method x_(n + 1) = x_n - f(x_n) / f'(x_n)
+1. Invariant
+2. Swap
+   - Calculate Y
+   - Calculate D
+3. Get virtual price
+4. Add liquidity
+   - Imbalance fee
+5. Remove liquidity
+6. Remove liquidity one token
+   - Calculate withdraw one token
+   - getYD
 
-### Build
 
-```shell
-$ forge build
-```
+## 🛠 Setup
 
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+> Ensure you have Foundry installed:
+```bash
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
