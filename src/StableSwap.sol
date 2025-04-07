@@ -27,8 +27,12 @@ import "./math/math.sol";
 contract StableSwap {
     using Math for uint256;
     // Number of tokens
-
     uint256 private constant N = 3;
+    
+    function N_COINS() public pure returns (uint256) {
+        return N;
+    }
+    
     // Amplification coefficient multiplied by N^(N - 1)
     // Higher value makes the curve more flat
     // Lower value makes the curve more like constant product AMM
